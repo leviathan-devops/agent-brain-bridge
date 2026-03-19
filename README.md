@@ -2,7 +2,7 @@
 
 **Free DeepSeek Web Chat Access for AI Agents - One-Click Installation**
 
-> **🚀 V2 NOW AVAILABLE:** Complete Hermes optimization with **95.6% token reduction** and **6x productivity improvement**!  
+> **🚀 V2 NOW AVAILABLE:** Complete Hermes optimization with **64.7% token reduction** and **2.9x productivity improvement** (ACTUALLY TESTED)!
 > See [README_V2.md](README_V2.md) for details or run `./setup.sh --v2`
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -17,7 +17,7 @@
 
 1. **Free Super Intelligence**: Agents get FREE access to DeepSeek R1 reasoning (normally $0.14/M tokens)
 2. **Web Chat Access**: Uses your existing DeepSeek web chat (no API keys needed)
-3. **Efficiency**: Reduces Hermes token usage by 70% (11k → 3k tokens per prompt)
+3. **Efficiency**: Reduces Hermes token usage by 64.7% (4.7k → 1.7k tokens per prompt) - ACTUALLY TESTED
 
 ## ✨ Features
 
@@ -68,7 +68,7 @@ cd agent-brain-bridge
          ▼                       ▼                       ▼
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │  Reduced Tokens │    │  Auth Session   │    │  Free R1 Access │
-│   (70% less)    │    │   (Persistent)  │    │  ($0 saved)     │
+│   (64.7% less)  │    │   (Persistent)  │    │  ($0 saved)     │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
@@ -90,7 +90,7 @@ cd agent-brain-bridge
    - Categorizes links, code, and discussions
 
 4. **Efficient Hermes Config** (`config-efficient.yaml`)
-   - Reduces token usage from 11k+ to ~3k
+   - Reduces token usage from 4.7k to ~1.7k (64.7% reduction)
    - Limits toolsets to essential ones only
    - Prevents rate limiting
 

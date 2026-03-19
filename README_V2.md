@@ -9,26 +9,46 @@
 
 ---
 
-## 📊 QUICK STATS
+## 📊 ACTUAL TEST RESULTS (March 19, 2026)
 
-| Metric | Before (V1) | After (V2) | Improvement |
-|--------|------------|------------|-------------|
-| **Tokens per prompt** | 11,356 | ~500 | **95.6% reduction** |
-| **Prompts per 3k tokens** | 1 | 6 | **6x more productive** |
-| **Context spillover** | Severe | None | **100% fixed** |
-| **Memory efficiency** | Poor | Optimized | **80-90% better** |
+| Metric | Default Hermes | Toolshed Optimized | Improvement |
+|--------|---------------|-------------------|-------------|
+| **Tokens per prompt** | 4,737 tokens | 1,670 tokens | **64.7% reduction** |
+| **Tools loaded** | 30 tools | 5 tools | **83.3% fewer tools** |
+| **Response time** | 28.3 seconds | 18.8 seconds | **33.6% faster** |
+| **Prompts per 3k tokens** | 0.63 prompts | 1.80 prompts | **2.9x more productive** |
+
+**Note:** Initial 11,356 token claim was based on tool schema analysis. Actual measured reduction is 64.7% with 2.9x productivity gain.
 
 **Based on:** Leviathan Cloud Architecture Guide (OpenClaw Systems)  
-**Reference PDF:** `Leviathan_Cloud_Architecture_Simple-2.pdf`
+**Reference PDF:** `Leviathan_Cloud_Architecture_Simple-2.pdf`  
+**Test Methodology:** Actual Hermes commands with token measurement, not theoretical analysis
+
+---
+
+## 🔬 TEST METHODOLOGY
+
+All measurements were taken using **actual Hermes commands** on March 19, 2026:
+
+1. **Token Measurement**: Used `hermes chat --query "What tools do you have?" --verbose` and extracted token count from output
+2. **Tool Count**: Extracted from Hermes banner showing available tools
+3. **Response Time**: Measured with Python's `time.time()` during command execution
+4. **Productivity Calculation**: `3000 tokens ÷ tokens_per_prompt` (same budget Claude uses)
+
+**Test Scripts Available**:
+- `test_real_tokens.py` - Actual token measurement
+- `demo_token_savings.py` - Complete demonstration
+- `ACTUAL_TEST_RESULTS.md` - Full test documentation
 
 ---
 
 ## 🎯 WHAT PROBLEMS WE SOLVED
 
 ### 🔥 CRITICAL: Token Waste
-**Problem:** Hermes burned **11,356 tokens per prompt** injecting 17 toolsets.  
-**Solution:** **Toolshed concept** from OpenClaw: "Store tools in a shed. Load only what you need."  
-**Result:** **~500 tokens per prompt** (95.6% reduction).
+**Problem:** Hermes burns **4,737 tokens per prompt** injecting 30 toolsets by default.
+**Actual Measurement:** Tested March 19, 2026 - 4,737 tokens for simple "What tools do you have?" query.
+**Solution:** **Toolshed concept** from OpenClaw: "Store tools in a shed. Load only what you need."
+**Result:** **1,670 tokens per prompt** (64.7% reduction, 2.9x more productive).
 
 ### 🧠 CRITICAL: Context Spillover  
 **Problem:** Memories from unrelated sessions polluted current context.  

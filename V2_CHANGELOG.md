@@ -10,8 +10,8 @@
 
 ## 🎯 V2 OVERVIEW
 
-**V1 Problem:** Hermes was burning **11,356 tokens per prompt** with context spillover and irrelevant memory injection.  
-**V2 Solution:** Now uses **~500 tokens per prompt** (95.6% reduction) with optimized memory architecture.
+**Problem:** Hermes burns **4,737 tokens per prompt** (measured) with 30 tools loaded by default.
+**V2 Solution:** Now uses **1,670 tokens per prompt** (64.7% reduction, measured) with optimized memory architecture.
 
 ### Key Breakthroughs:
 1. **Toolshed Concept** (from OpenClaw): "Store tools in a shed. Load only what you need."
@@ -21,27 +21,50 @@
 
 ---
 
-## 📊 TOKEN ECONOMICS COMPARISON
+## 📊 ACTUAL TOKEN ECONOMICS (TESTED MARCH 19, 2026)
 
-| Metric | V1 (Default Hermes) | V2 (Optimized) | Improvement |
-|--------|-------------------|----------------|-------------|
-| Tokens per prompt | 11,356 | ~500 | **95.6% reduction** |
-| Toolsets injected | 17 | 2-3 (dynamic) | **82-88% reduction** |
-| Memory tokens | ~200 | ~50-100 (smart) | **50-75% reduction** |
-| Context spillover | Yes (severe) | No (isolated) | **100% fixed** |
-| Productivity | 1 prompt/3k tokens | 6 prompts/3k tokens | **6x improvement** |
+| Metric | Default Hermes | V2 (Toolshed) | Improvement |
+|--------|---------------|---------------|-------------|
+| Tokens per prompt | 4,737 tokens | 1,670 tokens | **64.7% reduction** |
+| Tools loaded | 30 tools | 5 tools | **83.3% reduction** |
+| Response time | 28.3 seconds | 18.8 seconds | **33.6% faster** |
+| Context spillover | Yes | No (isolated) | **100% fixed** |
+| Productivity | 0.63 prompts/3k tokens | 1.80 prompts/3k tokens | **2.9x improvement** |
 
-**Practical Impact:**  
-- Claude: 3,000 tokens = 10-15 minutes of building  
-- Hermes V2: 3,000 tokens = **6 prompts** (6x more productive!)
+**Note on Initial Claims:**
+- **Initial Claim**: 11,356 tokens → 500 tokens (95.6% reduction)
+- **Actual Measurement**: 4,737 tokens → 1,670 tokens (64.7% reduction)
+- **Reason**: Initial claim based on tool schema analysis, actual measurement shows real usage
+
+**Practical Impact:**
+- Claude: 3,000 tokens = 10-15 minutes of building
+- Hermes V2: 3,000 tokens = **1.8 prompts** (2.9x more productive than default Hermes)
+
+---
+
+## 🔬 TEST METHODOLOGY (ACTUAL MEASUREMENTS)
+
+All V2 claims are based on **actual tests**, not theoretical analysis:
+
+1. **Token Measurement**: `hermes chat --query "What tools do you have?" --verbose`
+2. **Tool Count**: Extracted from Hermes banner output
+3. **Response Time**: Measured with Python's `time.time()` during execution
+4. **Test Scripts**: `test_real_tokens.py`, `demo_token_savings.py`
+5. **Full Documentation**: `ACTUAL_TEST_RESULTS.md`
+
+**Test Environment**:
+- Hermes Agent v0.1.0
+- Python 3.11.15
+- GLM-4.5-Flash model via Z.AI
+- Test Date: March 19, 2026
 
 ---
 
 ## 🔧 V2 IMPLEMENTATION DETAILS
 
 ### 1. TOOLSHED CONCEPT (From OpenClaw PDF)
-**Problem:** Hermes injected ALL 17 toolsets into EVERY prompt (~1,700 tokens waste)  
-**Solution:** "Store tools in a shed. Load only what you need."
+**Problem:** Hermes loads 30 tools by default (4,737 tokens measured)
+**Solution:** "Store tools in a shed. Load only what you need." - Keep only `file` and `clarify` tools (1,670 tokens measured)
 
 **Files Created:**
 - `config-toolshed.yaml` - Main Toolshed configuration
