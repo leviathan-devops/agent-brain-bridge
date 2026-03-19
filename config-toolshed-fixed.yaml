@@ -1,0 +1,76 @@
+# HERMES TOOLSHED CONFIGURATION - FIXED
+# Based on OpenClaw's Toolshed Evolution
+# Token target: <500 tokens per prompt (95% reduction from 11k+)
+# CORRECTED: Uses Hermes-compatible YAML structure
+
+model:
+  default: glm-4.5-flash
+  provider: zai
+
+# ========== MINIMAL TOOLSETS ==========
+# Only essential tools for basic operation
+# This reduces token usage from ~1,700 to ~300 tokens
+
+toolsets:
+  - file        # Basic file operations
+  - clarify     # Ask for clarification
+
+# ========== DISABLE NON-ESSENTIAL TOOLS ==========
+# These tools are NOT loaded by default
+# They can be loaded dynamically when needed
+
+# Note: Hermes doesn't have a 'disabled_toolsets' field
+# We simply don't include them in the toolsets list
+
+agent:
+  max_turns: 20
+
+terminal:
+  backend: local
+  cwd: .
+  timeout: 60
+  docker_image: nikolaik/python-nodejs:python3.11-nodejs20
+  docker_forward_env: []
+  singularity_image: docker://nikolaik/python-nodejs:python3.11-nodejs20
+  modal_image: nikolaik/python-nodejs:python3.11-nodejs20
+  daytona_image: nikolaik/python-nodejs:python3.11-nodejs20
+  container_cpu: 1
+  container_memory: 5120
+  container_disk: 51200
+  container_persistent: true
+  docker_volumes: []
+  docker_mount_cwd_to_workspace: false
+  persistent_shell: true
+
+browser:
+  inactivity_timeout: 60
+  record_sessions: false
+
+checkpoints:
+  enabled: true
+  max_snapshots: 10
+
+compression:
+  enabled: true
+  threshold: 0.5
+  summary_model: google/gemini-3-flash-preview
+  summary_provider: auto
+  summary_base_url: null
+
+display:
+  compact: true
+  personality: professional
+  resume_display: minimal
+  bell_on_complete: false
+  show_reasoning: false
+  streaming: false
+  show_cost: true
+  skin: default
+
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+  memory_char_limit: 1000
+  user_char_limit: 500
+
+_config_version: 10
