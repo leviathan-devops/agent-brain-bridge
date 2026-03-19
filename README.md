@@ -104,8 +104,8 @@ curl -sSL https://raw.githubusercontent.com/leviathan-devops/agent-brain-bridge/
 python3 authenticate_deepseek.py
 
 # Login with your DeepSeek credentials:
-# Email: cryptoforex36963@gmail.com
-# Password: CosmicEnergy369!
+# Email: YOUR_DEEPSEEK_EMAIL_HERE
+# Password: YOUR_DEEPSEEK_PASSWORD_HERE
 ```
 
 ### Step 3: Start Using
@@ -241,8 +241,8 @@ export HERMES_CONFIG="$HOME/.hermes/config-efficient.yaml"
 Create `~/.deepseek_credentials` (optional):
 ```json
 {
-  "email": "cryptoforex36963@gmail.com",
-  "password": "CosmicEnergy369!"
+  "email": "YOUR_DEEPSEEK_EMAIL_HERE",
+  "password": "YOUR_DEEPSEEK_PASSWORD_HERE"
 }
 ```
 

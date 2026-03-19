@@ -200,8 +200,8 @@ if [ "$AUTHENTICATE" = true ]; then
     echo
     echo "This will open a browser for you to login to DeepSeek."
     echo "Please use these credentials:"
-    echo "   Email: cryptoforex36963@gmail.com"
-    echo "   Password: CosmicEnergy369!"
+    echo "   Email: YOUR_DEEPSEEK_EMAIL_HERE"
+    echo "   Password: YOUR_DEEPSEEK_PASSWORD_HERE"
     echo
     echo "After login, the session will be saved for agent use."
     echo "You only need to do this once!"

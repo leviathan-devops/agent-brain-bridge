@@ -11,6 +11,43 @@ import subprocess
 import time
 import os
 import sys
+import getpass
+
+def get_credentials():
+    """Get DeepSeek credentials from environment or prompt."""
+    email = os.environ.get('DEEPSEEK_EMAIL')
+    password = os.environ.get('DEEPSEEK_PASSWORD')
+    
+    # Try to read from credentials file
+    if not email or not password:
+        creds_file = os.path.expanduser('~/.deepseek_credentials')
+        if os.path.exists(creds_file):
+            try:
+                with open(creds_file, 'r') as f:
+                    for line in f:
+                        if line.startswith('DEEPSEEK_EMAIL='):
+                            email = line.split('=', 1)[1].strip().strip('"\'')
+                        elif line.startswith('DEEPSEEK_PASSWORD='):
+                            password = line.split('=', 1)[1].strip().strip('"\'')
+            except Exception:
+                pass
+    
+    # Prompt if still not found
+    if not email or not password:
+        print("\n🔐 DeepSeek Credentials Required")
+        print("=" * 40)
+        print("Please enter your DeepSeek credentials.")
+        print("These will be used only for initial authentication.")
+        print("The session will be saved for future use.")
+        print("(Credentials are not stored in this script)")
+        print()
+        
+        if not email:
+            email = input("DeepSeek Email: ").strip()
+        if not password:
+            password = getpass.getpass("DeepSeek Password: ")
+    
+    return email, password
 
 def authenticate_deepseek():
     """
@@ -20,27 +57,31 @@ def authenticate_deepseek():
     print("=" * 70)
     print("DEEPSEEK MANUAL AUTHENTICATION")
     print("=" * 70)
+    
+    # Get credentials
+    email, password = get_credentials()
+    
     print()
     print("This script will open DeepSeek in a browser.")
     print("PLEASE LOGIN MANUALLY with your credentials:")
-    print(f"  Email: cryptoforex36963@gmail.com")
-    print(f"  Password: CosmicEnergy369!")
+    print(f"  Email: {email}")
+    print(f"  Password: {'*' * len(password)}")
     print()
     print("After login, the session will be saved for agent use.")
     print("You only need to do this once!")
     print()
     input("Press Enter to open DeepSeek browser...")
-    
+
     # Set environment variables
     os.environ['AGENT_BROWSER_ARGS'] = '--no-sandbox --disable-blink-features=AutomationControlled'
     os.environ['AGENT_BROWSER_USER_AGENT'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-    
+
     # Open DeepSeek with a persistent session
     print("\n🔓 Opening DeepSeek for authentication...")
     print("   Please login when the browser opens.")
     print("   After login, you can close the browser.")
     print()
-    
+
     # Use --headed to see the browser for manual login
     # Use --session to save the authenticated session
     cmd = [
@@ -49,28 +90,28 @@ def authenticate_deepseek():
         '--headed',  # Show browser window for manual login
         'open', 'https://chat.deepseek.com'
     ]
-    
+
     print(f"Running: {' '.join(cmd)}")
     print()
     print("⚠️  IMPORTANT: A browser window will open.")
-    print("   Login with: cryptoforex36963@gmail.com / CosmicEnergy369!")
+    print(f"   Login with: {email} / {'*' * len(password)}")
     print("   After login, wait 10 seconds, then close the browser.")
     print("   The script will continue automatically.")
     print()
-    
+
     try:
         # Run agent-browser
         process = subprocess.Popen(cmd)
-        
+
         # Wait for browser to open and give time for manual login
         print("⏳ Browser opened. Please login now...")
         print("   (Waiting 60 seconds for you to login)")
-        
+
         for i in range(60):
             time.sleep(1)
             if i % 10 == 0:
                 print(f"   {60-i} seconds remaining...")
-        
+
         # After waiting, check if process is still running
         if process.poll() is None:
             print("\n✅ Login time complete. Closing browser...")
@@ -173,6 +214,13 @@ if __name__ == "__main__":
         print("3. If session expires, run this script again")
         print()
         print("Session location: ~/.agent-browser/sessions/deepseek-agent")
+        
+        # Show how to set credentials for future
+        print("\n💡 To avoid entering credentials next time:")
+        print("   Set environment variables:")
+        print("   export DEEPSEEK_EMAIL='your_email@example.com'")
+        print("   export DEEPSEEK_PASSWORD='your_password'")
+        print("   Or create ~/.deepseek_credentials file")
     else:
         print("\n" + "=" * 70)
         print("❌ AUTHENTICATION FAILED")
