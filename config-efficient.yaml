@@ -1,0 +1,67 @@
+# Hermes Efficient Configuration
+# Reduces token usage from 11k+ to ~3k by limiting toolsets
+
+# Global settings
+max_turns: 20  # Reduced from 90
+compact_display: true
+model: glm-4.5-flash  # Using Zhipu AI GLM-4.5-flash
+
+# Toolset configuration - ONLY essential tools
+toolsets:
+  # Core file operations (minimal)
+  - name: file
+    description: Basic file operations
+    tools:
+      - read_file
+      - write_file
+      - edit
+      - list_directory
+  
+  # Search operations (essential)
+  - name: search_files
+    description: File search and pattern matching
+    tools:
+      - grep_search
+      - glob
+  
+  # Browser access for DeepSeek brain bridge
+  - name: browser
+    description: Web browser for DeepSeek access
+    tools:
+      - run_shell_command  # For agent-browser integration
+  
+  # Clarification (reduces confusion)
+  - name: clarify
+    description: Ask for clarification when needed
+    tools:
+      - ask_user_question
+
+# Exclude ALL other toolsets to save tokens
+# This reduces from 30+ toolsets to just 4
+
+# Memory settings
+memory:
+  enabled: true
+  max_entries: 10  # Keep it small
+
+# Rate limiting prevention
+rate_limit_prevention:
+  max_tokens_per_request: 4000
+  min_time_between_requests: 2.0  # seconds
+  
+# Response optimization
+response:
+  max_length: 2000
+  prefer_concise: true
+
+# DeepSeek brain bridge integration
+deepseek_bridge:
+  enabled: true
+  session_name: "deepseek-agent"
+  command: "python3 /home/leviathan/deepseek_brain_bridge.py"
+  
+# Research Agent integration
+research_agent:
+  enabled: true
+  command: "python3 /home/leviathan/research_agent.py"
+  data_extractor: "python3 /home/leviathan/slack_data_extractor.py"

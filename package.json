@@ -1,0 +1,44 @@
+{
+  "name": "agent-brain-bridge",
+  "version": "1.0.0",
+  "description": "DeepSeek brain bridge for AI agents - Free web chat access for agent thinking",
+  "main": "deepseek_brain_bridge.py",
+  "scripts": {
+    "setup": "./setup.sh",
+    "install": "./install.sh",
+    "auth": "python3 authenticate_deepseek.py",
+    "test": "python3 test_complete_system.py",
+    "brain-bridge": "python3 deepseek_brain_bridge.py",
+    "research": "python3 research_agent.py",
+    "slack": "python3 slack_data_extractor.py",
+    "start-hermes": "./start_hermes_efficient.sh"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "deepseek",
+    "brain-bridge",
+    "hermes",
+    "automation",
+    "web-chat",
+    "free-ai",
+    "reasoning"
+  ],
+  "author": "Leviathan DevOps",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel-labs/agent-browser": "^0.21.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leviathan-devops/agent-brain-bridge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/leviathan-devops/agent-brain-bridge/issues"
+  },
+  "homepage": "https://github.com/leviathan-devops/agent-brain-bridge#readme"
+}
