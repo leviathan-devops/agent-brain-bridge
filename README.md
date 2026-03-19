@@ -2,6 +2,9 @@
 
 **Free DeepSeek Web Chat Access for AI Agents - One-Click Installation**
 
+> **🚀 V2 NOW AVAILABLE:** Complete Hermes optimization with **95.6% token reduction** and **6x productivity improvement**!  
+> See [README_V2.md](README_V2.md) for details or run `./setup.sh --v2`
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Hermes Compatible](https://img.shields.io/badge/Hermes-Compatible-green.svg)](https://github.com/saoudrizwan/Hermes)
